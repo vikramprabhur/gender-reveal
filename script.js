@@ -33,17 +33,14 @@ function startCountdown() {
 }
 
 function revealGender() {
-  const genders = ["It's a Girl! 🎀", "It's a Boy! 🍼"];
-  const colors = ["#ffc0cb", "#add8e6"];
-  const randomIndex = Math.floor(Math.random() * 2);
+  document.getElementById("title").style.display = "none";
 
-  document.getElementById("title").style.display = "none"; // remove title
   const result = document.getElementById("result");
-  result.textContent = genders[randomIndex];
-  result.style.color = colors[randomIndex];
-  document.body.style.backgroundColor = colors[randomIndex];
-
-  launchConfetti(colors[randomIndex]);
+  result.textContent = "It's a Girl! 🎀";
+  result.style.color = "#ffc0cb"; // pink
+  document.body.style.backgroundColor = "#ffc0cb";
+  document.querySelector(".container").classList.add("reveal-border");
+  launchConfetti("#ffc0cb");
 }
 
 function launchConfetti(color) {
@@ -73,4 +70,5 @@ function resetApp() {
   document.getElementById("countdown").textContent = "";
   document.getElementById("title").style.display = "block";
   document.body.style.backgroundColor = "#f0f0f0";
+  document.querySelector(".container").classList.remove("reveal-border");
 }
