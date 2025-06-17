@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;      
     text-align: center;
     background-color: #f0f0f0;
     margin: 0;
@@ -9,6 +9,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    opacity: 0;
+    animation: bodyFade 1.2s ease forwards;
+  }
+
+  @keyframes bodyFade {
+    to {
+      opacity: 1;
+    }
   }
   
   
@@ -16,18 +24,22 @@ body {
     background: white;
     padding: 70px 30px;
     border-radius: 20px;
-    width: 90%;
+    width: 95%;
     max-width: 500px;
     text-align: center;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     animation: fadeInUp 1s ease both;
     border: 6px double #9e8171	;
+    transition: border-color 0.5s ease;
   }
   
   button {
     padding: 15px 35px;
-    font-size: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     border: none;
     background-color: #9e8171;
     color: white;
@@ -117,11 +129,21 @@ body {
       opacity: 1;
     }
   }
+
+  @keyframes pulseText {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  
   
 
   #replayBtn {
     padding: 12px 28px;
     font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     margin-top: 20px;
     background-color: #ffc0cb;
     color: white;
@@ -137,5 +159,34 @@ body {
   
   .reveal-border {
     border-color: #fc788e !important; 
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 50px 20px;
+      border-radius: 16px;
+    }
+  
+    h1 {
+      font-size: 28px;
+    }
+  
+    #revealBtn, #replayBtn {
+      font-size: 16px;
+      padding: 14px 24px;
+    }
+  
+    #countdown {
+      font-size: 60px;
+    }
+  
+    #result {
+      font-size: 48px;
+    }
+  }
+
+  .container:hover {
+    transform: scale(1.01);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
   }
   
