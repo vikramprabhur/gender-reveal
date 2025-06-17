@@ -25,21 +25,25 @@ function startCountdown() {
       document.getElementById("title").style.display = "none";
       setTimeout(() => {
         document.getElementById("replayBtn").style.display = "inline-block";
-      }, 7000);
+      }, 10000);
 
       revealGender();
     }
   }, 1000);
 }
 
-function revealGender() {
+async function revealGender() {
   document.getElementById("title").style.display = "none";
   const bgMusic = document.getElementById("bgMusic");
-  bgMusic.volume = 1;
-  bgMusic.play();
 
+try {
+  // Ensure music starts only on interaction
+  bgMusic.volume = 1;
+  await bgMusic.play();
+
+  // Fade out and stop after 15s
   setTimeout(() => {
-    let fadeInterval = setInterval(() => {
+    const fadeInterval = setInterval(() => {
       if (bgMusic.volume > 0.05) {
         bgMusic.volume -= 0.05;
       } else {
@@ -48,8 +52,11 @@ function revealGender() {
         bgMusic.currentTime = 0;
         clearInterval(fadeInterval);
       }
-    }, 200);
-  }, 15000);
+    }, 200); 
+  }, 12000); 
+} catch (err) {
+  console.warn("Audio playback failed or was blocked by browser:", err);
+}
 
   const result = document.getElementById("result");
   result.textContent = "It's a Girl! 🎀";
@@ -79,7 +86,7 @@ function launchConfetti(color) {
 
     setTimeout(() => {
       confetti.remove();
-    }, 7000);
+    }, 10000);
   }
 }
 
