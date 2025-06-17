@@ -36,27 +36,29 @@ async function revealGender() {
   document.getElementById("title").style.display = "none";
   const bgMusic = document.getElementById("bgMusic");
 
-try {
-  // Ensure music starts only on interaction
+  // Reset music state (in case of replay)
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
   bgMusic.volume = 1;
-  await bgMusic.play();
 
-  // Fade out and stop after 15s
+  try {
+    await bgMusic.play();
+  } catch (err) {
+    console.warn("Audio playback failed:", err);
+  }
+
   setTimeout(() => {
-    const fadeInterval = setInterval(() => {
+    let fadeOut = setInterval(() => {
       if (bgMusic.volume > 0.05) {
         bgMusic.volume -= 0.05;
       } else {
         bgMusic.volume = 0;
         bgMusic.pause();
         bgMusic.currentTime = 0;
-        clearInterval(fadeInterval);
+        clearInterval(fadeOut);
       }
     }, 200); 
   }, 12000); 
-} catch (err) {
-  console.warn("Audio playback failed or was blocked by browser:", err);
-}
 
   const result = document.getElementById("result");
   result.textContent = "It's a Girl! 🎀";
