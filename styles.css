@@ -18,21 +18,21 @@ body {
       opacity: 1;
     }
   }
-  
-  
+
   .container {
     background: white;
-    padding: 70px 30px;
-    border-radius: 20px;
-    width: 95%;
-    max-width: 500px;
+    padding: 80px 24px;
+    border-radius: 24px;
+    width: 96%;
+    max-width: 540px;
     text-align: center;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
     animation: fadeInUp 1s ease both;
-    border: 6px double #9e8171	;
-    transition: border-color 0.5s ease;
+    border: 6px double #9e8171;
+    transition: border-color 0.5s ease, padding 0.3s ease;
+    margin: 30px auto;
   }
+  
   
   button {
     padding: 15px 35px;
@@ -188,5 +188,84 @@ body {
   .container:hover {
     transform: scale(1.01);
     box-shadow: 0 16px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .balloon {
+    position: absolute;
+    bottom: -80px;
+    border-radius: 50%;
+    opacity: 0.9;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* soft shimmer */
+    animation: glideUp var(--float-time) ease-in-out forwards, sparkle 2s infinite;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+  
+  .balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 2px;
+    height: 30px;
+    background-color: #999;
+    transform: translateX(-50%);
+  }
+  
+  /* Elegant upward + side drift */
+  @keyframes glideUp {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.9;
+    }
+    25% {
+      transform: translate3d(var(--sway-left), -25vh, 0);
+    }
+    50% {
+      transform: translate3d(var(--sway-right), -50vh, 0);
+    }
+    75% {
+      transform: translate3d(var(--sway-left), -75vh, 0);
+    }
+    100% {
+      transform: translate3d(0, -100vh, 0);
+      opacity: 0;
+    }
+  }
+  
+  /* Sparkle shimmer effect */
+  @keyframes sparkle {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    }
+  }
+  
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 50px 18px;
+      border-radius: 16px;
+    }
+  
+    h1 {
+      font-size: 26px;
+    }
+  
+    #revealBtn, #replayBtn {
+      font-size: 16px;
+      padding: 12px 20px;
+    }
+  
+    #countdown {
+      font-size: 60px;
+    }
+  
+    #revealImage {
+      max-width: 100%;
+    }
   }
   
