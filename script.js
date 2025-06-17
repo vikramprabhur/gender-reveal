@@ -25,7 +25,7 @@ function startCountdown() {
       document.getElementById("title").style.display = "none";
       setTimeout(() => {
         document.getElementById("replayBtn").style.display = "inline-block";
-      }, 3000); // show after 3 seconds
+      }, 7000); 
 
       revealGender();
     }
@@ -63,7 +63,7 @@ function launchConfetti(color) {
 
     setTimeout(() => {
       confetti.remove();
-    }, 3000);
+    }, 7000);
   }
 }
 
