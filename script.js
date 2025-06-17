@@ -34,10 +34,14 @@ function startCountdown() {
 
 function revealGender() {
   document.getElementById("title").style.display = "none";
-
+  const bgMusic = document.getElementById("bgMusic");
+  bgMusic.play();
   const result = document.getElementById("result");
   result.textContent = "It's a Girl! 🎀";
   result.style.color = "#ffc0cb"; // pink
+  result.style.animation = "none";
+  result.offsetHeight;
+  result.style.animation = "pulseText 0.6s ease-in-out 2";
   document.body.style.backgroundColor = "#ffc0cb";
   document.querySelector(".container").classList.add("reveal-border");
   launchConfetti("#ffc0cb");
@@ -71,4 +75,7 @@ function resetApp() {
   document.getElementById("title").style.display = "block";
   document.body.style.backgroundColor = "#f0f0f0";
   document.querySelector(".container").classList.remove("reveal-border");
+  const bgMusic = document.getElementById("bgMusic");
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
 }
