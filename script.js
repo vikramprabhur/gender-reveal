@@ -49,7 +49,7 @@ function revealGender() {
         clearInterval(fadeInterval);
       }
     }, 200);
-  }, 17000);
+  }, 15000);
 
   const result = document.getElementById("result");
   result.textContent = "It's a Girl! 🎀";
