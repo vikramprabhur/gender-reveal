@@ -25,7 +25,7 @@ function startCountdown() {
       document.getElementById("title").style.display = "none";
       setTimeout(() => {
         document.getElementById("replayBtn").style.display = "inline-block";
-      }, 7000); 
+      }, 7000);
 
       revealGender();
     }
@@ -35,7 +35,22 @@ function startCountdown() {
 function revealGender() {
   document.getElementById("title").style.display = "none";
   const bgMusic = document.getElementById("bgMusic");
+  bgMusic.volume = 1;
   bgMusic.play();
+
+  setTimeout(() => {
+    let fadeInterval = setInterval(() => {
+      if (bgMusic.volume > 0.05) {
+        bgMusic.volume -= 0.05;
+      } else {
+        bgMusic.volume = 0;
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+        clearInterval(fadeInterval);
+      }
+    }, 200);
+  }, 17000);
+
   const result = document.getElementById("result");
   result.textContent = "It's a Girl! 🎀";
   result.style.color = "#ffc0cb"; // pink
@@ -44,6 +59,7 @@ function revealGender() {
   result.style.animation = "pulseText 0.6s ease-in-out 2";
   document.body.style.backgroundColor = "#ffc0cb";
   document.querySelector(".container").classList.add("reveal-border");
+  launchBalloons();
   launchConfetti("#ffc0cb");
 }
 
@@ -67,6 +83,55 @@ function launchConfetti(color) {
   }
 }
 
+function launchBalloons() {
+  const container = document.querySelector(".container");
+  const colors = [
+    "#ffc0cb",
+    "#ffb6c1",
+    "#f08080",
+    "#e75480",
+    "#ff69b4",
+    "#db3e4d",
+    "#ff6f61",
+    "#ff4d6d",
+    "#fcd253",
+    "#f9c80e",
+  ];
+
+  for (let i = 0; i < 14; i++) {
+    const balloon = document.createElement("div");
+    balloon.classList.add("balloon");
+
+    // Color
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    balloon.style.backgroundColor = color;
+
+    // Size
+    const size = Math.floor(Math.random() * 20) + 35;
+    balloon.style.width = `${size}px`;
+    balloon.style.height = `${size * 1.5}px`;
+
+    // Position
+    balloon.style.left = Math.random() * 90 + "%";
+
+    // Float + sway timings
+    const floatTime = (Math.random() * 3 + 5).toFixed(2) + "s"; 
+    balloon.style.setProperty("--float-time", floatTime);
+
+    const swayLeft = `${Math.floor(Math.random() * -20) - 10}px`;
+    const swayRight = `${Math.floor(Math.random() * 20) + 10}px`;
+    balloon.style.setProperty("--sway-left", swayLeft);
+    balloon.style.setProperty("--sway-right", swayRight);
+
+    container.appendChild(balloon);
+
+    // Remove after animation
+    setTimeout(() => {
+      balloon.remove();
+    }, parseFloat(floatTime) * 1000 + 1000);
+  }
+}
+
 function resetApp() {
   document.getElementById("revealBtn").style.display = "inline-block";
   document.getElementById("replayBtn").style.display = "none";
@@ -78,4 +143,5 @@ function resetApp() {
   const bgMusic = document.getElementById("bgMusic");
   bgMusic.pause();
   bgMusic.currentTime = 0;
+  bgMusic.volume = 1;
 }
